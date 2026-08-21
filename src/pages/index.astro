@@ -1,0 +1,440 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectsCarousel from '../components/ProjectsCarousel.astro';
+import ProjectsGallery from '../components/ProjectsGallery.astro';
+import { dictionary } from '../i18n/ui';
+
+const urlLang = Astro.url.searchParams.get('lang') as 'es' | 'en' || 'es';
+const t = dictionary[urlLang] || dictionary.es;
+---
+
+<Layout 
+  lang={urlLang}
+  title="MHG Barandas Huertas | Barandas y Pasamanos Personalizados a Medida"
+  description="Empresa especializada en la fabricación e instalación de barandas personalizadas y pasamanos de pared en acero inoxidable, madera de roble, pino, haya, forja y cristal. Fotos reales. Tel: 677 472 228."
+>
+  <!-- HERO SECTION -->
+  <section class="hero-section" aria-label="Sección Principal de MHG Barandas Huertas">
+    <div class="hero-bg-overlay"></div>
+    <div class="container">
+      
+      <div class="hero-card-frame gold-frame">
+        <div class="gold-frame-inner hero-card-inner">
+          <div class="hero-logo-box">
+            <img 
+              src="/assets/logo_MHG_998x439 (jpg).jpg" 
+              alt="Logo Oficial de MHG Barandas Huertas" 
+              class="hero-logo-img"
+              width="240"
+              height="100"
+            />
+          </div>
+
+          <div class="gold-divider">
+            <span class="gold-divider-icon">◆</span>
+          </div>
+
+          <h1 class="hero-title heading-serif-uppercase" data-i18n="hero.title">{t['hero.title']}</h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">{t['hero.subtitle']}</p>
+          <p class="hero-tag-accent subheading-tag" data-i18n="hero.script">{t['hero.script']}</p>
+
+          <div class="materials-bar">
+            <span data-i18n="hero.materials">{t['hero.materials']}</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="/barandas" class="btn-hero-gold" data-i18n="hero.btnCatalog">{t['hero.btnCatalog']}</a>
+            <a href="/contacto" class="btn-hero-outline" data-i18n="hero.btnQuote">{t['hero.btnQuote']}</a>
+          </div>
+
+          <div class="hero-tag-badge" data-i18n="hero.realPhotos">
+            ✦ {t['hero.realPhotos']} ✦
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAROUSEL INTERACTIVO DE TRABAJOS DESTACADOS -->
+  <section class="section-carousel-showcase" aria-label="Colección de Proyectos Destacados">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="subheading-tag" data-i18n="carousel.sub">{t['carousel.sub']}</span>
+        <h2 class="section-title heading-serif" data-i18n="carousel.title">{t['carousel.title']}</h2>
+        <div class="gold-divider"><span class="gold-divider-icon">❖</span></div>
+      </div>
+
+      <ProjectsCarousel lang={urlLang} />
+    </div>
+  </section>
+
+  <!-- GALERÍA DINÁMICA DE PROYECTOS (MODAL & FILTROS) -->
+  <section class="section-gallery-dynamic" aria-label="Galería Completa de Trabajos Reales">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="subheading-tag" data-i18n="gallery.sub">{t['gallery.sub']}</span>
+        <h2 class="section-title heading-serif" data-i18n="gallery.title">{t['gallery.title']}</h2>
+        <p class="section-desc" data-i18n="gallery.desc">{t['gallery.desc']}</p>
+        <div class="gold-divider"><span class="gold-divider-icon">◆</span></div>
+      </div>
+
+      <ProjectsGallery lang={urlLang} />
+    </div>
+  </section>
+
+  <!-- FEATURES / VALUE PROPOSITION -->
+  <section class="section-features" aria-label="Nuestras Ventajas y Calidad">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="subheading-tag" data-i18n="features.sub">{t['features.sub']}</span>
+        <h2 class="section-title heading-serif" data-i18n="features.title">{t['features.title']}</h2>
+        <div class="gold-divider"><span class="gold-divider-icon">❖</span></div>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 12l5-5m-5 5l5 5M22 12l-5-5m5 5l-5 5"></path><rect x="6" y="8" width="12" height="8" rx="1"></rect></svg>
+          </div>
+          <h3 data-i18n="features.f1.title">{t['features.f1.title']}</h3>
+          <p data-i18n="features.f1.desc">{t['features.f1.desc']}</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3 data-i18n="features.f2.title">{t['features.f2.title']}</h3>
+          <p data-i18n="features.f2.desc">{t['features.f2.desc']}</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 data-i18n="features.f3.title">{t['features.f3.title']}</h3>
+          <p data-i18n="features.f3.desc">{t['features.f3.desc']}</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          </div>
+          <h3 data-i18n="features.f4.title">{t['features.f4.title']}</h3>
+          <p data-i18n="features.f4.desc">{t['features.f4.desc']}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA CONTACT BANNER -->
+  <section class="section-cta-banner" aria-label="Llamada a la Acción para Presupuesto">
+    <div class="container">
+      <div class="cta-banner-card">
+        <div class="cta-banner-text">
+          <span class="subheading-tag" style="color: rgba(255,255,255,0.9);" data-i18n="cta.sub">{t['cta.sub']}</span>
+          <h2 data-i18n="cta.title">{t['cta.title']}</h2>
+          <p data-i18n="cta.desc">{t['cta.desc']}</p>
+        </div>
+        <div class="cta-banner-buttons">
+          <a href="tel:677472228" class="btn-phone-call">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span data-i18n="cta.phone">{t['cta.phone']}</span>
+          </a>
+          <a href="mailto:mhgmarcos@hotmail.com" class="btn-email-send">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span data-i18n="cta.email">{t['cta.email']}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* HERO STYLING */
+  .hero-section {
+    position: relative;
+    padding: 70px 0;
+    background: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+    overflow: hidden;
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(181, 149, 103, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-card-frame {
+    background: rgba(20, 18, 16, 0.92);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-card-inner {
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .hero-logo-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .hero-logo-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    background: #fff;
+    padding: 6px 16px;
+    border-radius: var(--radius-sm);
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.15em;
+    color: var(--color-gold-light);
+    margin-bottom: 6px;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  .hero-tag-accent {
+    font-size: 0.9rem;
+    color: var(--color-gold);
+    margin-bottom: 24px;
+  }
+
+  .materials-bar {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--color-gold-light);
+    border-top: 1px solid rgba(181, 149, 103, 0.3);
+    border-bottom: 1px solid rgba(181, 149, 103, 0.3);
+    padding: 10px 20px;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .btn-hero-gold {
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+    color: #FFF;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-gold);
+    transition: all 0.3s ease;
+  }
+
+  .btn-hero-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(181, 149, 103, 0.4);
+  }
+
+  .btn-hero-outline {
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-light);
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .btn-hero-outline:hover {
+    background: rgba(181, 149, 103, 0.15);
+    color: #FFF;
+  }
+
+  .hero-tag-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #A0968B;
+    text-transform: uppercase;
+  }
+
+  /* CAROUSEL SHOWCASE */
+  .section-carousel-showcase {
+    padding: 80px 0;
+    background: var(--color-bg);
+  }
+
+  /* DYNAMIC GALLERY SECTION */
+  .section-gallery-dynamic {
+    padding: 80px 0;
+    background: var(--color-bg-alt);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-top: 6px;
+  }
+
+  /* SECTION FEATURES */
+  .section-features {
+    padding: 80px 0;
+    background-color: var(--color-bg);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+    color: var(--color-text-main);
+    margin-top: 4px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 44px;
+  }
+
+  .feature-card {
+    background: var(--color-card);
+    padding: 28px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gold);
+  }
+
+  .feature-icon {
+    color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: var(--color-text-main);
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    flex-grow: 1;
+  }
+
+  /* CTA BANNER */
+  .section-cta-banner {
+    padding: 50px 0 80px;
+    background: var(--color-bg);
+  }
+
+  .cta-banner-card {
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+    border-radius: var(--radius-lg);
+    padding: 44px 36px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    box-shadow: var(--shadow-gold);
+  }
+
+  .cta-banner-text h2 {
+    font-size: 1.7rem;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+
+  .cta-banner-text p {
+    opacity: 0.9;
+    font-size: 0.92rem;
+  }
+
+  .cta-banner-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 240px;
+  }
+
+  .btn-phone-call, .btn-email-send {
+    background: white;
+    color: var(--color-text-main);
+    padding: 12px 20px;
+    border-radius: var(--radius-full);
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+  }
+
+  .btn-phone-call:hover, .btn-email-send:hover {
+    transform: translateY(-2px);
+    background: var(--color-dark-box);
+    color: var(--color-gold-light);
+  }
+
+  @media (max-width: 900px) {
+    .hero-title {
+      font-size: 1.9rem;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+    }
+    .cta-banner-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cta-banner-buttons {
+      width: 100%;
+    }
+  }
+</style>

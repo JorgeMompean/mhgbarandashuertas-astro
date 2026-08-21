@@ -1,0 +1,434 @@
+---
+import { dictionary } from '../i18n/ui';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = dictionary[lang] || dictionary.es;
+const pathname = Astro.url.pathname;
+const langQuery = lang === 'en' ? `?lang=en` : '';
+
+const navItems = [
+  { key: 'nav.home', name: t['nav.home'], href: `/${langQuery}` },
+  { key: 'nav.railings', name: t['nav.railings'], href: `/barandas${langQuery}` },
+  { key: 'nav.stairs', name: t['nav.stairs'], href: `/escaleras${langQuery}` },
+  { key: 'nav.contact', name: t['nav.contact'], href: `/contacto${langQuery}` },
+];
+---
+
+<header class="header">
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <div class="top-info">
+        <span class="info-item desktop-only">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <a href="tel:677472228" data-i18n="header.phone">{t['header.phone']}</a>
+        </span>
+        <span class="info-item desktop-only">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <a href="mailto:mhgmarcos@hotmail.com">mhgmarcos@hotmail.com</a>
+        </span>
+        <span class="info-tagline mobile-only" data-i18n="header.tagline">
+          ✦ {t['header.tagline']} ✦
+        </span>
+      </div>
+
+      <!-- LANGUAGE SWITCHER IN TOP BAR -->
+      <div class="top-controls">
+        <div class="lang-pill-switch" role="group" aria-label="Seleccionar idioma">
+          <button 
+            type="button" 
+            id="lang-btn-es" 
+            class={`pill-option ${lang === 'es' ? 'active' : ''}`}
+            onclick="window.applyGlobalLanguage && window.applyGlobalLanguage('es', true)"
+          >
+            ES
+          </button>
+          <button 
+            type="button" 
+            id="lang-btn-en" 
+            class={`pill-option ${lang === 'en' ? 'active' : ''}`}
+            onclick="window.applyGlobalLanguage && window.applyGlobalLanguage('en', true)"
+          >
+            EN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER LOGO & NAV -->
+  <div class="main-header">
+    <div class="header-container">
+      <a href={`/${langQuery}`} class="logo-link">
+        <img 
+          src="/assets/logo_MHG_998x439 (jpg).jpg" 
+          alt="MHG Barandas Huertas" 
+          class="logo-img"
+          width="110"
+          height="46"
+        />
+        <div class="brand-text">
+          <span class="brand-title">BARANDAS HUERTAS</span>
+          <span class="brand-subtitle" data-i18n="header.tagline">{t['header.tagline']}</span>
+        </div>
+      </a>
+
+      <!-- MOBILE CONTROLS (HAMBURGER) -->
+      <div class="mobile-actions">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          {navItems.map((item) => {
+            const cleanHref = item.href.split('?')[0];
+            const isActive = pathname === cleanHref || (cleanHref !== '/' && pathname.startsWith(cleanHref));
+            return (
+              <li class="nav-item">
+                <a 
+                  href={item.href} 
+                  class={`nav-link ${isActive ? 'active' : ''}`}
+                  data-i18n={item.key}
+                >
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        
+        <div class="header-phone-cta desktop-only">
+          <a href="tel:677472228" class="btn-phone-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span data-i18n="header.phone">{t['header.phone']}</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (mobileToggle && navMenu) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+  }
+
+  // Bind ES and EN buttons to window.applyGlobalLanguage
+  const btnEs = document.getElementById('lang-btn-es');
+  const btnEn = document.getElementById('lang-btn-en');
+
+  if (btnEs) {
+    btnEs.addEventListener('click', () => {
+      if ((window as any).applyGlobalLanguage) (window as any).applyGlobalLanguage('es', true);
+    });
+  }
+
+  if (btnEn) {
+    btnEn.addEventListener('click', () => {
+      if ((window as any).applyGlobalLanguage) (window as any).applyGlobalLanguage('en', true);
+    });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: var(--shadow-md);
+  }
+
+  .top-bar {
+    background-color: var(--color-dark-box);
+    color: var(--color-gold-light);
+    font-size: 0.82rem;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(181, 149, 103, 0.2);
+  }
+
+  .top-bar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .info-item a {
+    color: #e2d7c5;
+  }
+  .info-item a:hover {
+    color: var(--color-gold);
+  }
+
+  .info-tagline {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--color-gold-light);
+    text-transform: uppercase;
+  }
+
+  /* PILL SWITCH */
+  .lang-pill-switch {
+    display: flex;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius-full);
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .pill-option {
+    background: transparent;
+    border: none;
+    color: #b5a898;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .pill-option.active {
+    background: var(--color-gold);
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  .pill-option:hover:not(.active) {
+    color: #FFFFFF;
+  }
+
+  .main-header {
+    background: rgba(250, 247, 242, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-card-border);
+    padding: 10px 0;
+    position: relative;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #fff;
+    padding: 2px;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text-main);
+    line-height: 1.1;
+  }
+
+  .brand-subtitle {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--color-gold-dark);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-main);
+    padding: 6px 0;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--color-gold-dark);
+  }
+
+  .btn-phone-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-dark-box);
+    color: var(--color-gold-light);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: 1px solid var(--color-gold);
+    transition: all 0.3s ease;
+  }
+
+  .btn-phone-header:hover {
+    background: var(--color-gold);
+    color: #FFF;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .mobile-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-main);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .desktop-only {
+    display: flex;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 850px) {
+    .desktop-only {
+      display: none !important;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+
+    .top-bar-container {
+      padding: 0 16px;
+    }
+    
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--color-bg);
+      flex-direction: column;
+      padding: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
+      z-index: 999;
+      border-bottom: 3px solid var(--color-gold);
+    }
+
+    .nav-menu.active {
+      max-height: 320px;
+      opacity: 1;
+      padding: 24px 16px;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+</style>

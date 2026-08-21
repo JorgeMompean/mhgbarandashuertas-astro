@@ -1,0 +1,321 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectsGallery from '../components/ProjectsGallery.astro';
+import { dictionary } from '../i18n/ui';
+
+const urlLang = Astro.url.searchParams.get('lang') as 'es' | 'en' || 'es';
+const t = dictionary[urlLang] || dictionary.es;
+
+const barandasCatalog = [
+  {
+    id: "madera",
+    titleKey: "railings.cat.wood.title",
+    matKey: "railings.cat.wood.mat",
+    descKey: "railings.cat.wood.desc",
+    f1Key: "railings.cat.wood.f1",
+    f2Key: "railings.cat.wood.f2",
+    f3Key: "railings.cat.wood.f3",
+    image: "/assets/A5.jpg"
+  },
+  {
+    id: "acero",
+    titleKey: "railings.cat.steel.title",
+    matKey: "railings.cat.steel.mat",
+    descKey: "railings.cat.steel.desc",
+    f1Key: "railings.cat.steel.f1",
+    f2Key: "railings.cat.steel.f2",
+    f3Key: "railings.cat.steel.f3",
+    image: "/assets/A52.jpg"
+  },
+  {
+    id: "forja",
+    titleKey: "railings.cat.iron.title",
+    matKey: "railings.cat.iron.mat",
+    descKey: "railings.cat.iron.desc",
+    f1Key: "railings.cat.iron.f1",
+    f2Key: "railings.cat.iron.f2",
+    f3Key: "railings.cat.iron.f3",
+    image: "/assets/VINILOS.jpg"
+  },
+  {
+    id: "cristal",
+    titleKey: "railings.cat.glass.title",
+    matKey: "railings.cat.glass.mat",
+    descKey: "railings.cat.glass.desc",
+    f1Key: "railings.cat.glass.f1",
+    f2Key: "railings.cat.glass.f2",
+    f3Key: "railings.cat.glass.f3",
+    image: "/assets/A5.jpg"
+  }
+];
+---
+
+<Layout 
+  lang={urlLang}
+  title={`${t['railings.title']} | MHG Barandas Huertas`}
+  description={t['railings.sub']}
+>
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="container">
+      <div class="gold-frame page-header-frame">
+        <div class="gold-frame-inner text-center page-header-inner">
+          <span class="subheading-tag" data-i18n="railings.headerTag">{t['railings.headerTag']}</span>
+          <h1 class="heading-serif page-title" data-i18n="railings.title">{t['railings.title']}</h1>
+          <div class="gold-divider"><span class="gold-divider-icon">❖</span></div>
+          <p class="page-subtitle" data-i18n="railings.sub">{t['railings.sub']}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG GRID -->
+  <section class="catalog-section">
+    <div class="container">
+      <div class="catalog-list">
+        {barandasCatalog.map((item, index) => (
+          <div class={`catalog-item ${index % 2 !== 0 ? 'reverse' : ''}`} id={item.id}>
+            <div class="catalog-img-box gold-frame">
+              <div class="gold-frame-inner overflow-hidden">
+                <img src={item.image} alt={t[item.titleKey as keyof typeof t]} class="catalog-img" width="500" height="380" />
+              </div>
+            </div>
+
+            <div class="catalog-info">
+              <span class="catalog-materials" data-i18n={item.matKey}>{t[item.matKey as keyof typeof t]}</span>
+              <h2 class="heading-serif catalog-item-title" data-i18n={item.titleKey}>{t[item.titleKey as keyof typeof t]}</h2>
+              <div class="gold-mini-line"></div>
+              <p class="catalog-desc" data-i18n={item.descKey}>{t[item.descKey as keyof typeof t]}</p>
+              
+              <ul class="catalog-features-list">
+                <li><span>✓</span> <span data-i18n={item.f1Key}>{t[item.f1Key as keyof typeof t]}</span></li>
+                <li><span>✓</span> <span data-i18n={item.f2Key}>{t[item.f2Key as keyof typeof t]}</span></li>
+                <li><span>✓</span> <span data-i18n={item.f3Key}>{t[item.f3Key as keyof typeof t]}</span></li>
+              </ul>
+
+              <div class="catalog-actions">
+                <a 
+                  href={`https://wa.me/34677472228?text=Hola,%20me%20interesa%20presupuesto`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn-gold"
+                >
+                  <span data-i18n="railings.consult">{t['railings.consult']}</span> <span data-i18n={item.titleKey}>{t[item.titleKey as keyof typeof t]}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA INTERACTIVA MODAL DE FOTOS -->
+  <section class="section-interactive-photos">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="subheading-tag" data-i18n="railings.galSub">{t['railings.galSub']}</span>
+        <h2 class="heading-serif section-title" data-i18n="railings.galTitle">{t['railings.galTitle']}</h2>
+        <div class="gold-divider"><span class="gold-divider-icon">❧</span></div>
+      </div>
+
+      <ProjectsGallery lang={urlLang} />
+    </div>
+  </section>
+
+  <!-- QUOTE FORM PROMPT -->
+  <section class="section-quote-prompt">
+    <div class="container text-center">
+      <div class="gold-frame quote-prompt-box">
+        <div class="gold-frame-inner quote-prompt-inner">
+          <span class="subheading-tag" data-i18n="railings.quoteSub">{t['railings.quoteSub']}</span>
+          <h2 class="heading-serif" data-i18n="railings.quoteTitle">{t['railings.quoteTitle']}</h2>
+          <p data-i18n="railings.quoteDesc">{t['railings.quoteDesc']}</p>
+          <div class="quote-prompt-buttons">
+            <a href="/contacto" class="btn-hero-gold" data-i18n="railings.btnForm">{t['railings.btnForm']}</a>
+            <a href="tel:677472228" class="btn-hero-outline" data-i18n="railings.btnCall">{t['railings.btnCall']}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding: 50px 0 30px;
+    background-color: var(--color-bg);
+  }
+
+  .page-header-frame {
+    background: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+  }
+
+  .page-header-inner {
+    padding: 40px 24px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    color: var(--color-gold-light);
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+
+  .page-subtitle {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    color: #BBB0A3;
+  }
+
+  .catalog-section {
+    padding: 60px 0;
+    background-color: var(--color-bg);
+  }
+
+  .catalog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+  }
+
+  .catalog-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  .catalog-item.reverse {
+    direction: rtl;
+  }
+  .catalog-item.reverse .catalog-info {
+    direction: ltr;
+  }
+
+  .catalog-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .catalog-img-box {
+    background: #141210;
+    max-height: 400px;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .catalog-img {
+    width: 100%;
+    height: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  .catalog-item:hover .catalog-img {
+    transform: scale(1.04);
+  }
+
+  .catalog-materials {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .catalog-item-title {
+    font-size: 1.7rem;
+    color: var(--color-text-main);
+  }
+
+  .gold-mini-line {
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-gold);
+    margin: 10px 0 14px;
+  }
+
+  .catalog-desc {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    margin-bottom: 18px;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .catalog-features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .catalog-features-list li {
+    font-size: 0.88rem;
+    color: var(--color-text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .catalog-features-list span {
+    color: var(--color-gold);
+    font-weight: bold;
+  }
+
+  .section-interactive-photos {
+    padding: 60px 0;
+    background-color: var(--color-bg-alt);
+  }
+
+  .section-quote-prompt {
+    padding: 40px 0 80px;
+  }
+
+  .quote-prompt-box {
+    background: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+  }
+
+  .quote-prompt-inner {
+    padding: 44px 24px;
+  }
+
+  .quote-prompt-inner h2 {
+    color: var(--color-gold-light);
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+  }
+
+  .quote-prompt-inner p {
+    color: #B3AAA0;
+    max-width: 550px;
+    margin: 0 auto 28px;
+  }
+
+  .quote-prompt-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 850px) {
+    .catalog-item, .catalog-item.reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+  }
+</style>

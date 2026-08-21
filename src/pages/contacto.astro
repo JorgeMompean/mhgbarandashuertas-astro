@@ -1,0 +1,475 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { dictionary } from '../i18n/ui';
+
+const urlLang = Astro.url.searchParams.get('lang') as 'es' | 'en' || 'es';
+const t = dictionary[urlLang] || dictionary.es;
+---
+
+<Layout 
+  lang={urlLang}
+  title="Contacto y Solicitud de Presupuesto | MHG Barandas Huertas"
+  description="Contacta con MHG Barandas Huertas. Llama al 677 472 228 o escríbenos a mhgmarcos@hotmail.com para presupuestos a medida de barandas y pasamanos."
+>
+  <!-- HEADER -->
+  <section class="page-header">
+    <div class="container">
+      <div class="gold-frame page-header-frame">
+        <div class="gold-frame-inner text-center page-header-inner">
+          <span class="subheading-tag" data-i18n="contact.headerSub">{t['contact.headerSub']}</span>
+          <h1 class="heading-serif page-title" data-i18n="contact.title">{t['contact.title']}</h1>
+          <div class="gold-divider"><span class="gold-divider-icon">◆</span></div>
+          <p class="page-subtitle" data-i18n="contact.sub">{t['contact.sub']}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CONTENT GRID -->
+  <section class="section-contact-main">
+    <div class="container">
+      <div class="contact-grid">
+        
+        <!-- LEFT: DIRECT CARDS -->
+        <div class="contact-info-column">
+          <h2 class="heading-serif column-title" data-i18n="contact.directTitle">{t['contact.directTitle']}</h2>
+          <p class="column-desc" data-i18n="contact.directDesc">{t['contact.directDesc']}</p>
+
+          <div class="contact-cards-list">
+            <!-- Phone & WhatsApp Card -->
+            <a href="https://wa.me/34677472228?text=Hola,%20quisiera%20solicitar%20presupuesto" target="_blank" rel="noopener" class="direct-card gold-frame">
+              <div class="gold-frame-inner card-inner">
+                <div class="card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div class="card-text">
+                  <span class="card-label" data-i18n="contact.phoneLabel">{t['contact.phoneLabel']}</span>
+                  <span class="card-main-val" data-i18n="header.phone">{t['header.phone']}</span>
+                  <span class="card-sub-val" data-i18n="contact.phoneSub">{t['contact.phoneSub']}</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Email Card -->
+            <a href="mailto:mhgmarcos@hotmail.com" class="direct-card gold-frame">
+              <div class="gold-frame-inner card-inner">
+                <div class="card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="card-text">
+                  <span class="card-label" data-i18n="contact.emailLabel">{t['contact.emailLabel']}</span>
+                  <span class="card-main-val">mhgmarcos@hotmail.com</span>
+                  <span class="card-sub-val" data-i18n="contact.emailSub">{t['contact.emailSub']}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Service Guarantee Box -->
+          <div class="guarantee-box">
+            <h4 data-i18n="contact.guaranteeTitle">{t['contact.guaranteeTitle']}</h4>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span data-i18n="contact.g1">{t['contact.g1']}</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span data-i18n="contact.g2">{t['contact.g2']}</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span data-i18n="contact.g3">{t['contact.g3']}</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: INTERACTIVE FORM -->
+        <div class="contact-form-column">
+          <div class="gold-frame form-frame">
+            <div class="gold-frame-inner form-inner">
+              <h2 class="heading-serif form-title" data-i18n="contact.formTitle">{t['contact.formTitle']}</h2>
+              <p class="form-subtitle" data-i18n="contact.formSub">{t['contact.formSub']}</p>
+
+              <form id="quote-form" class="quote-form">
+                <div class="form-group">
+                  <label for="nombre" data-i18n="form.name">{t['form.name']}</label>
+                  <input type="text" id="nombre" name="nombre" required placeholder={t['form.namePlaceholder']} data-i18n="form.namePlaceholder" />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="telefono" data-i18n="form.phone">{t['form.phone']}</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder={t['form.phonePlaceholder']} data-i18n="form.phonePlaceholder" />
+                  </div>
+                  <div class="form-group">
+                    <label for="email" data-i18n="form.email">{t['form.email']}</label>
+                    <input type="email" id="email" name="email" required placeholder={t['form.emailPlaceholder']} data-i18n="form.emailPlaceholder" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="tipo" data-i18n="form.type">{t['form.type']}</label>
+                    <select id="tipo" name="tipo">
+                      <option value="Baranda Personalizada" data-i18n="form.type.opt1">{t['form.type.opt1']}</option>
+                      <option value="Pasamanos de Pared" data-i18n="form.type.opt2">{t['form.type.opt2']}</option>
+                      <option value="Escalera Completa" data-i18n="form.type.opt3">{t['form.type.opt3']}</option>
+                      <option value="Otro" data-i18n="form.type.opt4">{t['form.type.opt4']}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="material" data-i18n="form.material">{t['form.material']}</label>
+                    <select id="material" name="material">
+                      <option value="Madera" data-i18n="form.mat.opt1">{t['form.mat.opt1']}</option>
+                      <option value="Acero Inoxidable" data-i18n="form.mat.opt2">{t['form.mat.opt2']}</option>
+                      <option value="Acero Lacado" data-i18n="form.mat.opt3">{t['form.mat.opt3']}</option>
+                      <option value="Forja" data-i18n="form.mat.opt4">{t['form.mat.opt4']}</option>
+                      <option value="Cristal" data-i18n="form.mat.opt5">{t['form.mat.opt5']}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mensaje" data-i18n="form.msg">{t['form.msg']}</label>
+                  <textarea id="mensaje" name="mensaje" rows="4" placeholder={t['form.msgPlaceholder']} data-i18n="form.msgPlaceholder"></textarea>
+                </div>
+
+                <button type="submit" class="btn-hero-gold btn-submit-full" data-i18n="form.btn">
+                  {t['form.btn']}
+                </button>
+              </form>
+
+              <!-- SUCCESS MESSAGE (Hidden by default) -->
+              <div id="form-success" class="form-success-box" style="display: none;">
+                <div class="success-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <h3 data-i18n="form.successTitle">{t['form.successTitle']}</h3>
+                <p data-i18n="form.successMsg">{t['form.successMsg']}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section-faq">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="subheading-tag" data-i18n="faq.headerSub">{t['faq.headerSub']}</span>
+        <h2 class="heading-serif section-title" data-i18n="faq.headerTitle">{t['faq.headerTitle']}</h2>
+        <div class="gold-divider"><span class="gold-divider-icon">◆</span></div>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3 class="faq-question" data-i18n="faq.q1">{t['faq.q1']}</h3>
+          <p class="faq-answer" data-i18n="faq.a1">{t['faq.a1']}</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question" data-i18n="faq.q2">{t['faq.q2']}</h3>
+          <p class="faq-answer" data-i18n="faq.a2">{t['faq.a2']}</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question" data-i18n="faq.q3">{t['faq.q3']}</h3>
+          <p class="faq-answer" data-i18n="faq.a3">{t['faq.a3']}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('quote-form');
+  const successBox = document.getElementById('form-success');
+
+  if (form && successBox) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+    });
+  }
+</script>
+
+<style>
+  .page-header {
+    padding: 50px 0 30px;
+    background-color: var(--color-bg);
+  }
+
+  .page-header-frame {
+    background: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+  }
+
+  .page-header-inner {
+    padding: 40px 24px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    color: var(--color-gold-light);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  .page-subtitle {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    color: #BBB0A3;
+  }
+
+  .section-contact-main {
+    padding: 60px 0;
+    background-color: var(--color-bg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 40px;
+  }
+
+  .column-title {
+    font-size: 1.8rem;
+    color: var(--color-text-main);
+    margin-bottom: 8px;
+  }
+
+  .column-desc {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+  }
+
+  .contact-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .direct-card {
+    background: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .direct-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .card-inner {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .card-icon {
+    background: rgba(181, 149, 103, 0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold-light);
+    flex-shrink: 0;
+  }
+
+  .card-label {
+    display: block;
+    font-size: 0.72rem;
+    color: #A0968B;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-main-val {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-gold-light);
+    margin: 2px 0;
+  }
+
+  .card-sub-val {
+    display: block;
+    font-size: 0.78rem;
+    color: #C2B8AC;
+  }
+
+  .guarantee-box {
+    background: var(--color-card);
+    border: 1px solid var(--color-gold);
+    padding: 22px;
+    border-radius: var(--radius-md);
+  }
+
+  .guarantee-box h4 {
+    font-family: var(--font-serif);
+    color: var(--color-gold-dark);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .guarantee-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .guarantee-box li {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .guarantee-box svg {
+    color: var(--color-gold);
+  }
+
+  /* FORM STYLING */
+  .form-frame {
+    background: var(--color-card);
+  }
+
+  .form-inner {
+    padding: 32px 24px;
+  }
+
+  .form-title {
+    font-size: 1.7rem;
+    color: var(--color-text-main);
+    margin-bottom: 4px;
+  }
+
+  .form-subtitle {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+  }
+
+  .quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-main);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 11px 14px;
+    border: 1px solid rgba(181, 149, 103, 0.4);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--color-gold-dark);
+    background: #FFF;
+  }
+
+  .btn-submit-full {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .form-success-box {
+    text-align: center;
+    padding: 36px 16px;
+  }
+
+  .success-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--color-gold);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .form-success-box h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    margin-bottom: 8px;
+  }
+
+  /* FAQ */
+  .section-faq {
+    padding: 60px 0;
+    background-color: var(--color-bg-alt);
+  }
+
+  .faq-list {
+    max-width: 800px;
+    margin: 36px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--color-card);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-card-border);
+  }
+
+  .faq-question {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-gold-dark);
+    margin-bottom: 6px;
+  }
+
+  .faq-answer {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

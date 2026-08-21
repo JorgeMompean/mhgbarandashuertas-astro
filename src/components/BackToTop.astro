@@ -1,0 +1,75 @@
+---
+---
+
+<button id="back-to-top" class="back-to-top-btn" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>
+
+<style>
+  .back-to-top-btn {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    z-index: 990;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-dark-box);
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .back-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top-btn:hover {
+    background: var(--color-gold);
+    color: var(--color-dark-box);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: 768px) {
+    .back-to-top-btn {
+      bottom: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>

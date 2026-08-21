@@ -1,0 +1,212 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { dictionary } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'es' | 'en';
+  canonicalUrl?: string;
+}
+
+const queryLang = Astro.url.searchParams.get('lang') as 'es' | 'en';
+const lang: 'es' | 'en' = queryLang === 'en' ? 'en' : (Astro.props.lang || 'es');
+const t = dictionary[lang] || dictionary.es;
+
+const currentPath = Astro.url.pathname;
+const siteUrl = "https://www.balaustradashuertas.com";
+const canonical = `${siteUrl}${currentPath}`;
+
+const { 
+  title = "MHG Barandas Huertas | Barandas y Pasamanos Personalizados a Medida",
+  description = "Especialistas en barandas personalizadas y pasamanos de pared en madera (roble, pino, haya), acero inoxidable, forja y cristal. Fotos reales de trabajos. Contacto directo 677 472 228.",
+  canonicalUrl = canonical
+} = Astro.props;
+
+const schemaOrgJSONLD = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "MHG Barandas Huertas",
+  "url": siteUrl,
+  "logo": `${siteUrl}/assets/logo_MHG_998x439%20(jpg).jpg`,
+  "image": `${siteUrl}/assets/A5.jpg`,
+  "telephone": "+34677472228",
+  "email": "mhgmarcos@hotmail.com",
+  "priceRange": "€€",
+  "description": description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- FAVICON SQUARED -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="barandas, pasamanos, barandas personalizadas, pasamanos de pared, acero inoxidable, madera roble pino haya, forja artesanal, cristal templado, barandas de escalera, MHG barandas huertas, presupuesto barandas" />
+    <meta name="author" content="MHG Barandas Huertas" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="MHG Barandas Huertas" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/assets/A5.jpg`} />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrgJSONLD)} />
+
+    <!-- ZERO-FLICKER (FOUC) INSTANT PRE-RENDER PROTECTION SCRIPT -->
+    <script is:inline>
+      (function() {
+        try {
+          var urlParams = new URLSearchParams(window.location.search);
+          var queryLang = urlParams.get('lang');
+          var savedLang = localStorage.getItem('user-lang');
+          var targetLang = (queryLang === 'en' || queryLang === 'es') ? queryLang : (savedLang === 'en' ? 'en' : 'es');
+
+          if (targetLang === 'en') {
+            document.documentElement.classList.add('lang-loading');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
+    <!-- ZERO-FLICKER SYNCHRONOUS I18N ENGINE -->
+    <script is:inline define:vars={{ dictData: dictionary }}>
+      window.i18nDict = dictData;
+
+      window.applyGlobalLanguage = function(targetLang, updateUrl) {
+        var lang = targetLang === 'en' ? 'en' : 'es';
+        localStorage.setItem('user-lang', lang);
+        document.documentElement.lang = lang;
+
+        var dict = window.i18nDict ? (window.i18nDict[lang] || window.i18nDict.es) : null;
+        if (!dict) {
+          document.documentElement.classList.remove('lang-loading');
+          document.documentElement.classList.add('lang-ready');
+          return;
+        }
+
+        // 1. Update Pill Active Class
+        var btnEs = document.getElementById('lang-btn-es');
+        var btnEn = document.getElementById('lang-btn-en');
+        if (btnEs && btnEn) {
+          btnEs.classList.toggle('active', lang === 'es');
+          btnEn.classList.toggle('active', lang === 'en');
+        }
+
+        // 2. Translate all data-i18n elements
+        var elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (key && dict[key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+              el.setAttribute('placeholder', dict[key]);
+            } else {
+              el.textContent = dict[key];
+            }
+          }
+        });
+
+        // 3. Translate Dynamic Project Cards (Carousel & Gallery)
+        var projectItems = document.querySelectorAll('.carousel-slide, .gallery-item');
+        projectItems.forEach(function(item) {
+          var title = item.getAttribute('data-title-' + lang);
+          var desc = item.getAttribute('data-desc-' + lang);
+          var cat = item.getAttribute('data-cat-' + lang);
+
+          var titleEl = item.querySelector('.carousel-item-title, .project-card-title');
+          var descEl = item.querySelector('.carousel-item-desc, .project-card-desc');
+          var catEl = item.querySelector('.slide-tag, .cat-tag');
+
+          if (titleEl && title) titleEl.textContent = title;
+          if (descEl && desc) descEl.textContent = desc;
+          if (catEl && cat) catEl.textContent = cat;
+        });
+
+        // 4. Update Navigation Links so user stays in current language
+        var allLinks = document.querySelectorAll('a[href]');
+        allLinks.forEach(function(link) {
+          var rawHref = link.getAttribute('href');
+          if (!rawHref || rawHref.startsWith('http') || rawHref.startsWith('tel:') || rawHref.startsWith('mailto:') || rawHref.startsWith('#') || link.classList.contains('pill-option')) {
+            return;
+          }
+          try {
+            var url = new URL(rawHref, window.location.origin);
+            if (lang === 'en') {
+              url.searchParams.set('lang', 'en');
+            } else {
+              url.searchParams.delete('lang');
+            }
+            link.setAttribute('href', url.pathname + url.search + url.hash);
+          } catch(e) {}
+        });
+
+        // 5. Optionally update browser URL
+        if (updateUrl) {
+          try {
+            var currentUrl = new URL(window.location.href);
+            if (lang === 'en') {
+              currentUrl.searchParams.set('lang', 'en');
+            } else {
+              currentUrl.searchParams.delete('lang');
+            }
+            window.history.replaceState({}, '', currentUrl.toString());
+          } catch (e) {}
+        }
+
+        // Reveal body smoothly with zero flicker!
+        document.documentElement.classList.remove('lang-loading');
+        document.documentElement.classList.add('lang-ready');
+      };
+
+      // RUN IMMEDIATELY ON DOM CONTENT LOAD OR PARSE
+      (function() {
+        try {
+          var urlParams = new URLSearchParams(window.location.search);
+          var queryLang = urlParams.get('lang');
+          var savedLang = localStorage.getItem('user-lang');
+          var initialLang = (queryLang === 'en' || queryLang === 'es') ? queryLang : (savedLang === 'en' ? 'en' : 'es');
+
+          if (document.readyState !== 'loading') {
+            window.applyGlobalLanguage(initialLang, false);
+          } else {
+            document.addEventListener('DOMContentLoaded', function() {
+              window.applyGlobalLanguage(initialLang, false);
+            });
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <Header lang={lang} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <WhatsAppButton />
+    <BackToTop />
+  </body>
+</html>

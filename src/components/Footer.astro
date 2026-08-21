@@ -1,0 +1,197 @@
+---
+import { dictionary } from '../i18n/ui';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const t = dictionary[lang] || dictionary.es;
+const langQuery = lang === 'en' ? '?lang=en' : '';
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      
+      <!-- BRAND & DESCRIPTION -->
+      <div class="footer-brand">
+        <a href={`/${langQuery}`} class="footer-logo-link">
+          <img 
+            src="/assets/logo_MHG_998x439 (jpg).jpg" 
+            alt="MHG Barandas Huertas" 
+            class="footer-logo-img"
+            width="120"
+            height="50"
+          />
+          <div class="footer-brand-text">
+            <span class="footer-brand-title">BARANDAS HUERTAS</span>
+            <span class="footer-brand-sub" data-i18n="header.tagline">{t['header.tagline']}</span>
+          </div>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc">{t['footer.desc']}</p>
+      </div>
+
+      <!-- NAVIGATION LINKS -->
+      <div class="footer-links">
+        <h4 class="footer-heading" data-i18n="footer.nav">{t['footer.nav']}</h4>
+        <ul>
+          <li><a href={`/${langQuery}`} data-i18n="nav.home">{t['nav.home']}</a></li>
+          <li><a href={`/barandas${langQuery}`} data-i18n="nav.railings">{t['nav.railings']}</a></li>
+          <li><a href={`/escaleras${langQuery}`} data-i18n="nav.stairs">{t['nav.stairs']}</a></li>
+          <li><a href={`/contacto${langQuery}`} data-i18n="nav.contact">{t['nav.contact']}</a></li>
+        </ul>
+      </div>
+
+      <!-- MATERIALS & FINISHES -->
+      <div class="footer-links">
+        <h4 class="footer-heading" data-i18n="footer.materials">{t['footer.materials']}</h4>
+        <ul>
+          <li><a href={`/barandas${langQuery}#madera`} data-i18n="footer.mat.wood">{t['footer.mat.wood']}</a></li>
+          <li><a href={`/barandas${langQuery}#acero`} data-i18n="footer.mat.steel">{t['footer.mat.steel']}</a></li>
+          <li><a href={`/barandas${langQuery}#forja`} data-i18n="footer.mat.iron">{t['footer.mat.iron']}</a></li>
+          <li><a href={`/barandas${langQuery}#cristal`} data-i18n="footer.mat.glass">{t['footer.mat.glass']}</a></li>
+          <li><a href={`/escaleras${langQuery}`} data-i18n="footer.mat.handrails">{t['footer.mat.handrails']}</a></li>
+        </ul>
+      </div>
+
+      <!-- DIRECT CONTACT -->
+      <div class="footer-contact">
+        <h4 class="footer-heading" data-i18n="footer.contact">{t['footer.contact']}</h4>
+        <ul class="contact-info-list">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:677472228" data-i18n="header.phone">{t['header.phone']}</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:mhgmarcos@hotmail.com">mhgmarcos@hotmail.com</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <a href="https://wa.me/34677472228" target="_blank" rel="noopener" data-i18n="footer.wa">{t['footer.wa']}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="footer-bottom">
+      <div class="gold-divider"><span class="gold-divider-icon">◆</span></div>
+      <p>&copy; {new Date().getFullYear()} MHG Barandas Huertas. <span data-i18n="footer.rights">{t['footer.rights']}</span></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-dark-box);
+    color: var(--color-dark-box-text);
+    padding: 60px 0 24px;
+    border-top: 1px solid var(--color-gold);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo-img {
+    height: 44px;
+    width: auto;
+    background: #FFF;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .footer-brand-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--color-gold-light);
+    display: block;
+  }
+
+  .footer-brand-sub {
+    font-size: 0.65rem;
+    color: #A0968B;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .footer-desc {
+    font-size: 0.85rem;
+    color: #C2B8AC;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-heading {
+    font-family: var(--font-serif);
+    color: var(--color-gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links ul, .contact-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a, .contact-info-list a {
+    color: #C2B8AC;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover, .contact-info-list a:hover {
+    color: var(--color-gold-light);
+  }
+
+  .contact-info-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #C2B8AC;
+  }
+
+  .contact-info-list svg {
+    color: var(--color-gold-light);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #8C8275;
+    padding-top: 20px;
+  }
+
+  .footer-bottom p {
+    margin-top: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
